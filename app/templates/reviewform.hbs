@@ -1,0 +1,37 @@
+<div class="modal modal-transparent fade" id="reviewform" tabindex="-1" role="dialog" aria-label="Add new review form area"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="text-center  modal-title">New review</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+
+                <label for="name">Name*</label>
+                {{input type="text" maxlength="15"  value=name class="form-control" name="name" id="name"  placeholder="Name" autofocus="autofocus" required=true}}
+
+                <label for="rating_fieldset">Your rating</label>
+                <br/>
+                <fieldset  onchange={{action 'updateRating' value='target.value' }} id="rating_fieldset" name="rating_fieldset" class="rating">
+                    {{input type="radio" value=5 class="form-control" name="rating" id="star5"}} <label  for="star5" title="Rocks!">5 stars</label>
+                    {{input type="radio" value=4 class="form-control" name="rating" id="star4"}} <label for="star4" title="Pretty good">4 stars</label>
+                    {{input type="radio" value=3 class="form-control" name="rating" id="star3"}} <label  for="star3" title="Meh">3 stars</label>
+                    {{input type="radio" value=2 class="form-control" name="rating" id="star2"}} <label for="star2" title="Kinda bad">2 stars</label>
+                    {{input type="radio" value=1 class="form-control" name="rating" id="star1"}} <label for="star1" title="Poor">1 star</label>
+                 </fieldset>
+                  <br/>
+                  <br/>
+                  <label for="comment">Comment*</label>
+                  {{textarea maxlength="100" placeholder="Delicious food!" class="form-control" style="resize: none;"
+                   id="comment" value=comment}}
+
+        </div>
+      </div>
+      <div class="modal-footer">
+           <button type="button"  disabled={{isDisabled}} class="btn btn-default" {{action 'postReview'}} data-dismiss="modal">Post review</button>
+           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

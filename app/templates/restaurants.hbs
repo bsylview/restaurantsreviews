@@ -1,0 +1,56 @@
+<div id="restaurants" style="background-color:white;" class="carousel slide" data-interval="false" data-ride="carousel">
+    <div class="carousel-inner">
+        {{#each restaurants as |restaurant|}}
+             <div id={{restaurant.id}} class={{restaurant.class}}>
+               <div class="text-center">
+                 <div  class="card col-md-offset-3 col-md-6">
+                     <img alt={{restaurant.description}} class="img" style="background-position: center 25%;" src={{restaurant.img}}
+                          width="300px" height="150px"/>
+                      <div class="card-block">
+                            <h2 >{{restaurant.name}}</h2>
+                              {{#each stars as |star|}}
+                                  {{#if (lte star.id restaurant.rating)}}
+                                      <span style="color:#800000" class={{star.class}}>☆</span>
+                                  {{else}}
+                                        <span style="color:#800000" class="star-icon">☆</span>
+                                  {{/if}}
+                              {{/each}}
+                            <h5>Speciality:{{restaurant.speciality}}</h5>
+                            <h5>Open daily:{{restaurant.open}}</h5>
+                            <hr>
+                            <div class="text-center">
+                                  <button  {{action 'setRestaurant' restaurant.id}} data-toggle="modal" data-target="#reviewform" aria-label="add new review" style="position:relative; top: -25px;" type="button" class="btn btn-primary btn-circle btn-lg">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                  </button>
+                            </div>
+                            {{#each restaurant.reviews as |review|}}
+                                <div class="well">
+                                  {{#each stars as |star|}}
+                                      {{#if (lte star.id review.rating)}}
+                                          <span style="color:#800000" class={{star.class}}>☆</span>
+                                      {{else}}
+                                            <span style="color:#800000" class="star-icon">☆</span>
+                                      {{/if}}
+                                  {{/each}}
+                                    <h2 style="overflow-wrap: break-word;">{{review.name}}</h2>
+                                    <h5 align="center" style="overflow-wrap: break-word;">{{review.comment}}</h5>
+                                    <h6><b><{{moment-format review.date}}</b></h6>
+                                  </div>
+                            {{/each}}
+                      </div>
+                 </div>
+                </div>
+             </div>
+         {{/each}}
+    </div>
+
+    <a aria-label="previous restaurant" class="left carousel-control" href="#restaurants" role="button" data-slide="prev">
+       <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a aria-label="next restaurant" class="right carousel-control" href="#restaurants" role="button" data-slide="next">
+       <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+
+{{partial "reviewform"}}
+{{partial "filterform"}}
